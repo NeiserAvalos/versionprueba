@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +20,12 @@
             background-position: center;
             background-repeat: no-repeat;
         }
-        h1, p.intro-text {
+
+        h1,
+        p.intro-text {
             color: white;
         }
+
         .login-container {
             background-color: #fff;
             padding: 20px;
@@ -29,8 +33,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             margin-top: 20px;
+            width: 90%;
+            max-width: 400px;
         }
-        input[type="text"], input[type="password"] {
+
+        input[type="text"],
+        input[type="password"] {
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
@@ -38,6 +46,7 @@
             border-radius: 4px;
             font-size: 16px;
         }
+
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -47,15 +56,38 @@
             cursor: pointer;
             font-size: 16px;
         }
+
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
         .error-message {
             color: red;
             margin-top: 10px;
         }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+
+            .login-container {
+                padding: 15px;
+                width: 100%;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: calc(100% - 16px);
+            }
+
+            input[type="submit"] {
+                width: 100%;
+            }
+        }
     </style>
 </head>
+
 <body>
     <h1>Bienvenido</h1>
     <div id="login" class="login-container">
@@ -80,7 +112,7 @@
                 window.location.href = 'inventario.html?user=admin';
                 return false;
             }
-            
+
             // Usuarios de tienda: acceso individual
             for (var i = 1; i <= 6; i++) {
                 if (username === 'tienda' + i && password === 'password' + i) {
