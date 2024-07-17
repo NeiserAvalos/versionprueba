@@ -141,7 +141,6 @@
             background-color: #45a049;
         }
 
-        /* Estilos del modal */
         .modal {
             display: none;
             position: fixed;
@@ -207,7 +206,6 @@
                 </div>
             </div>
         </div>
-        <!-- Repetir la estructura de columnas de marca para cada tienda -->
         <div class="store" id="store1">
             <h2>Tienda 1</h2>
             <div class="brand-columns">
@@ -338,7 +336,6 @@
 
     <button class="add-button" id="addButton">Añadir</button>
 
-    <!-- El modal para añadir producto -->
     <div id="addProductModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
@@ -389,7 +386,7 @@
 
             locations.forEach(location => {
                 const container = document.querySelector(`#${location} .brand-columns`);
-                container.innerHTML = ''; // Limpiar las columnas existentes
+                container.innerHTML = '';
                 brands.forEach(brand => {
                     const storedProducts = JSON.parse(localStorage.getItem(`${location}${brand}`)) || [];
                     const column = document.createElement('div');
@@ -414,7 +411,7 @@
 
         function addProduct() {
             const productName = document.getElementById('productName').value;
-            const productCapacity = document.getElementById('productCapacity').value; // Solo el valor numérico
+            const productCapacity = document.getElementById('productCapacity').value;
             const productRam = document.getElementById('productRam').value + ' RAM';
             const productColor = document.getElementById('productColor').value;
             let productBrand = document.getElementById('productBrand').value;
@@ -423,7 +420,6 @@
 
             if (productBrand === 'other' && otherBrand) {
                 productBrand = otherBrand;
-                // Añadir la nueva marca a la lista de marcas
                 let brands = JSON.parse(localStorage.getItem('brands')) || ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'];
                 if (!brands.includes(productBrand)) {
                     brands.push(productBrand);
@@ -435,7 +431,7 @@
                 const newProduct = {
                     name: productName,
                     brand: productBrand,
-                    capacity: productCapacity + ' GB', // Concatenar " GB"
+                    capacity: productCapacity + ' GB',
                     ram: productRam,
                     color: productColor
                 };
@@ -446,7 +442,7 @@
                 loadProducts();
                 document.getElementById('productForm').reset();
                 document.getElementById('otherBrand').style.display = 'none';
-                closeAddProductModal(); // Cerrar el modal después de añadir el producto
+                closeAddProductModal();
                 return false;
             }
 
@@ -468,24 +464,20 @@
             openAddProductModal();
         };
 
-        // Función para abrir el modal
         function openAddProductModal() {
             const modal = document.getElementById('addProductModal');
             modal.style.display = 'block';
         }
 
-        // Función para cerrar el modal
         function closeAddProductModal() {
             const modal = document.getElementById('addProductModal');
             modal.style.display = 'none';
         }
 
-        // Cerrar modal si se hace clic en el botón de cerrar (×)
         document.getElementById('closeModal').onclick = function () {
             closeAddProductModal();
         };
 
-        // Cerrar modal si se hace clic fuera de él (opcional)
         window.onclick = function (event) {
             const modal = document.getElementById('addProductModal');
             if (event.target === modal) {
@@ -511,13 +503,12 @@
                 }
                 document.getElementById('store' + user.slice(-1)).style.display = 'block';
             } else {
-                window.location.href = 'index.html'; // Redireccionar si el usuario no es válido
+                window.location.href = 'index.html';
             }
 
-            loadProducts(); // Cargar productos desde localStorage
+            loadProducts();
         };
 
     </script>
 </body>
-
 </html>
