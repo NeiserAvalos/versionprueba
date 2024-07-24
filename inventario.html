@@ -6,138 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario de Almacén y Tiendas</title>
     <style>
-        h1 {
-            margin-top: 35px;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
+        h1 {
+            margin-top: 40px;
+            color: #222;
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        h2 {
+            margin-top: 5px;
         }
 
         .inventory-container {
-            margin-top: 2px;
-            flex-wrap: wrap;
-            justify-content: center;
-            display: none;
-            width: 100%;
-        }
-
-        .inventory-container.active {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .warehouse,
         .store {
-            background-color: #fff;
-            padding: 0px 20px 20px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 15px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+            width: 100%;
+            max-width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: auto;
             text-align: center;
-            width: 80%;
-            max-width: 1200px;
+            white-space: nowrap;
         }
 
         .warehouse {
-            background-color: #d1e7dd;
+            background-color: #e0f7fa;
+            border-left: 8px solid #00acc1;
         }
 
         .store {
-            background-color: #f8d7da;
+            background-color: #fce4ec;
+            border-left: 8px solid #ec407a;
+        }
+
+        .warehouse:hover,
+        .store:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0);
         }
 
         .brand-columns {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
             width: 100%;
+            flex-wrap: nowrap;
+            padding-right: 1px;
+            box-sizing: border-box;
+            overflow-x: auto;
         }
 
         .brand-column {
-            background-color: #f8f8f8;
-            padding: 8px;
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            background-color: #fafafa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(20, 0, 0, 0.15);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .brand-column:hover {
+            background-color: #f0f0f0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
 
         .brand-column h3 {
-            margin-top: 10px;
+            margin-top: 0;
+            color: #333;
+            font-size: 1.3em;
+            font-weight: 600;
         }
 
-        .item-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 10px 0;
-            text-align: left;
-        }
-
-        .item-list li {
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(199, 19, 19, 0.1);
-        }
-
-        .add-product-form {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .add-product-btn {
+            display: inline-block;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-align: center;
-        }
-
-        .add-product-form.active {
-            display: block;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 30px;
             cursor: pointer;
-            font-size: 16px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        button.add-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
 
-        button.add-button:hover {
+        .add-product-btn:hover {
             background-color: #45a049;
         }
 
@@ -150,25 +131,32 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0, 0, 0);
             background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
             background-color: #fff;
             margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
+            padding: 25px;
+            border-radius: 10px;
             width: 80%;
-            max-width: 500px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 220px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h2 {
+            margin-top: 0px;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            color: #333;
         }
 
         .close {
             color: #aaa;
             float: right;
-            font-size: 28px;
+            font-size: 1.5em;
             font-weight: bold;
         }
 
@@ -178,337 +166,276 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .form-group input {
+            margin-top: 6px;
+            margin-bottom: 10px;
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group select {
+            margin-top: 6px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 5px;
+            align-self: center;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .item-list li {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(199, 19, 19, 0.1);
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
 <body>
     <h1>Inventario de Almacén y Tiendas</h1>
 
-    <div id="inventory" class="inventory-container">
+    <div class="inventory-container">
+        <button class="add-product-btn" id="openModalBtn">Agregar Producto</button>
+
         <div class="warehouse" id="warehouse">
             <h2>Almacén</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="warehouseXiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="warehouseSamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="warehouseMotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="warehouseZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="warehouseBrands">
             </div>
         </div>
         <div class="store" id="store1">
             <h2>Tienda 1</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="store1XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="store1XiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="store1SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="store1SamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="store1MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="store1MotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="store1ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="store1ZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="store1Brands">
             </div>
         </div>
         <div class="store" id="store2">
             <h2>Tienda 2</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="store2XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="store2XiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="store2SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="store2SamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="store2MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="store2MotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="store2ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="store2ZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="store2Brands">
             </div>
         </div>
         <div class="store" id="store3">
             <h2>Tienda 3</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="store3XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="store3XiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="store3SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="store3SamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="store3MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="store3MotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="store3ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="store3ZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="store3Brands">
             </div>
         </div>
         <div class="store" id="store4">
             <h2>Tienda 4</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="store4XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="store4XiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="store4SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="store4SamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="store4MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="store4MotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="store4ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="store4ZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="store4Brands">
             </div>
         </div>
         <div class="store" id="store5">
             <h2>Tienda 5</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="store5XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="store5XiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="store5SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="store5SamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="store5MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="store5MotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="store5ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="store5ZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="store5Brands">
             </div>
         </div>
         <div class="store" id="store6">
             <h2>Tienda 6</h2>
-            <div class="brand-columns">
-                <div class="brand-column" id="store6XiaomiColumn">
-                    <h3>Xiaomi</h3>
-                    <ul class="item-list" id="store6XiaomiItems"></ul>
-                </div>
-                <div class="brand-column" id="store6SamsungColumn">
-                    <h3>Samsung</h3>
-                    <ul class="item-list" id="store6SamsungItems"></ul>
-                </div>
-                <div class="brand-column" id="store6MotorolaColumn">
-                    <h3>Motorola</h3>
-                    <ul class="item-list" id="store6MotorolaItems"></ul>
-                </div>
-                <div class="brand-column" id="store6ZTEColumn">
-                    <h3>ZTE</h3>
-                    <ul class="item-list" id="store6ZTEItems"></ul>
-                </div>
+            <div class="brand-columns" id="store6Brands">
             </div>
         </div>
     </div>
 
-    <button class="add-button" id="addButton">Añadir</button>
-
-    <div id="addProductModal" class="modal">
+    <div class="modal" id="productModal">
         <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h2>Añadir Producto</h2>
-            <form id="productForm" onsubmit="return addProduct()">
-                <select id="productBrand" name="productBrand" required>
-                    <option value="">Seleccionar Marca</option>
-                    <option value="Xiaomi">Xiaomi</option>
-                    <option value="Samsung">Samsung</option>
-                    <option value="Motorola">Motorola</option>
-                    <option value="ZTE">ZTE</option>
-                    <option value="other">Otra</option>
-                </select><br>
-                <select id="productLocation" name="productLocation" required>
-                    <option value="">Seleccionar Ubicación</option>
-                    <option value="warehouse">Almacén</option>
-                    <option value="store1">Tienda 1</option>
-                    <option value="store2">Tienda 2</option>
-                    <option value="store3">Tienda 3</option>
-                    <option value="store4">Tienda 4</option>
-                    <option value="store5">Tienda 5</option>
-                    <option value="store6">Tienda 6</option>
-                </select><br>
-                <input type="text" id="productName" name="productName" placeholder="Nombre del Producto" required><br>
-                <input type="text" id="productCapacity" name="productCapacity" placeholder="Capacidad" required><br>
-                <input type="text" id="productRam" name="productRam" placeholder="Memoria RAM" required><br>
-                <input type="text" id="productColor" name="productColor" placeholder="Color" required><br>
-                <input type="text" id="otherBrand" name="otherBrand" placeholder="Otra Marca"
-                    style="display: none;"><br>
-                <input type="submit" value="Añadir Producto">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <h2>Nuevo Producto</h2>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="location">Ubicación:</label>
+                    <select id="location" name="location" required>
+                        <option value="" disabled selected>Seleccione la Ubicación</option>
+                        <option value="warehouse">Almacén</option>
+                        <option value="store1">Tienda 1</option>
+                        <option value="store2">Tienda 2</option>
+                        <option value="store3">Tienda 3</option>
+                        <option value="store4">Tienda 4</option>
+                        <option value="store5">Tienda 5</option>
+                        <option value="store6">Tienda 6</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="brand">Marca:</label>
+                    <select id="brand" name="brand" required>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productName">Nombre:</label>
+                    <input type="text" id="productName" name="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productCapacity">Capacidad:</label>
+                    <input type="text" id="productCapacity" name="productCapacity" required>
+                </div>
+                <div class="form-group">
+                    <label for="productRam">Memoria RAM:</label>
+                    <input type="text" id="productRam" name="productRam" required>
+                </div>
+                <div class="form-group">
+                    <label for="productColor">Color:</label>
+                    <input type="text" id="productColor" name="productColor" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Agregar</button>
+                </div>
             </form>
         </div>
     </div>
 
     <script>
-        function getParameterByName(name, url = window.location.href) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-            var results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('productModal');
+        const locationSelect = document.getElementById('location');
+        const brandSelect = document.getElementById('brand');
+        const productForm = document.getElementById('productForm');
+
+        const brands = {
+            warehouse: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+            store1: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+            store2: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+            store3: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+            store4: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+            store5: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+            store6: ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'],
+        };
+
+        function updateBrands() {
+            const location = locationSelect.value;
+            const brandOptions = brands[location] || [];
+            brandSelect.innerHTML = brandOptions.map(brand => `<option value="${brand}">${brand}</option>`).join('');
         }
 
-        function loadProducts() {
-            const locations = ['warehouse', 'store1', 'store2', 'store3', 'store4', 'store5', 'store6'];
-            const brands = JSON.parse(localStorage.getItem('brands')) || ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'];
+        function updateInventory() {
+            const storeIds = ['warehouse', 'store1', 'store2', 'store3', 'store4', 'store5', 'store6'];
 
-            locations.forEach(location => {
-                const container = document.querySelector(`#${location} .brand-columns`);
-                container.innerHTML = '';
-                brands.forEach(brand => {
-                    const storedProducts = JSON.parse(localStorage.getItem(`${location}${brand}`)) || [];
-                    const column = document.createElement('div');
-                    column.classList.add('brand-column');
-                    column.id = `${location}${brand}Column`;
-                    column.innerHTML = `<h3>${brand}</h3><ul class="item-list" id="${location}${brand}Items"></ul>`;
-                    const itemList = column.querySelector(`#${location}${brand}Items`);
-                    storedProducts.forEach(product => {
-                        const newProduct = document.createElement('li');
-                        newProduct.innerHTML = `
-                        <strong>${product.name}</strong><br>
-                        Capacidad: ${product.capacity}<br>
-                        Memoria RAM: ${product.ram}<br>
-                        Color: ${product.color}
-                    `;
-                        itemList.appendChild(newProduct);
+            storeIds.forEach(location => {
+                const container = document.getElementById(`${location}Brands`);
+                if (container) {
+                    container.innerHTML = '';
+
+                    brands[location].forEach(brand => {
+                        const brandColumn = document.createElement('div');
+                        brandColumn.className = 'brand-column';
+                        brandColumn.innerHTML =
+                            `<h3>${brand}</h3>
+                    <ul class="item-list" id="${brand.replace(/\s+/g, '')}"></ul>`;
+                        container.appendChild(brandColumn);
                     });
-                    container.appendChild(column);
-                });
+                }
+            });
+            applyStyles();
+        }
+
+        function applyStyles() {
+            const brandColumns = document.querySelectorAll('.brand-column');
+
+            brandColumns.forEach(column => {
+                column.style.display = 'block';
+                column.style.width = 'auto';
+                column.style.whiteSpace = 'normal';
             });
         }
 
-        function addProduct() {
-            const productName = document.getElementById('productName').value;
-            const productCapacity = document.getElementById('productCapacity').value;
-            const productRam = document.getElementById('productRam').value + ' RAM';
-            const productColor = document.getElementById('productColor').value;
-            let productBrand = document.getElementById('productBrand').value;
-            const otherBrand = document.getElementById('otherBrand').value;
-            const productLocation = document.getElementById('productLocation').value;
-
-            if (productBrand === 'other' && otherBrand) {
-                productBrand = otherBrand;
-                let brands = JSON.parse(localStorage.getItem('brands')) || ['Xiaomi', 'Samsung', 'Motorola', 'ZTE'];
-                if (!brands.includes(productBrand)) {
-                    brands.push(productBrand);
-                    localStorage.setItem('brands', JSON.stringify(brands));
-                }
-            }
-
-            if (productName && productCapacity && productRam && productColor && productBrand && productLocation) {
-                const newProduct = {
-                    name: productName,
-                    brand: productBrand,
-                    capacity: productCapacity + ' GB',
-                    ram: productRam,
-                    color: productColor
-                };
-                const storedProducts = JSON.parse(localStorage.getItem(`${productLocation}${productBrand}`)) || [];
-                storedProducts.push(newProduct);
-                localStorage.setItem(`${productLocation}${productBrand}`, JSON.stringify(storedProducts));
-
-                loadProducts();
-                document.getElementById('productForm').reset();
-                document.getElementById('otherBrand').style.display = 'none';
-                closeAddProductModal();
-                return false;
-            }
-
-            return false;
-        }
-
-        document.getElementById('productBrand').addEventListener('change', function () {
-            const otherBrandInput = document.getElementById('otherBrand');
-            if (this.value === 'other') {
-                otherBrandInput.style.display = 'block';
-                otherBrandInput.required = true;
-            } else {
-                otherBrandInput.style.display = 'none';
-                otherBrandInput.required = false;
-            }
-        });
-
-        document.getElementById('addButton').onclick = function () {
-            openAddProductModal();
+        openModalBtn.onclick = function () {
+            modal.style.display = 'flex';
+            updateBrands();
         };
 
-        function openAddProductModal() {
-            const modal = document.getElementById('addProductModal');
-            modal.style.display = 'block';
-        }
-
-        function closeAddProductModal() {
-            const modal = document.getElementById('addProductModal');
+        closeModalBtn.onclick = function () {
             modal.style.display = 'none';
-        }
-
-        document.getElementById('closeModal').onclick = function () {
-            closeAddProductModal();
         };
 
         window.onclick = function (event) {
-            const modal = document.getElementById('addProductModal');
-            if (event.target === modal) {
-                closeAddProductModal();
+            if (event.target == modal) {
+                modal.style.display = 'none';
             }
         };
 
-        window.onload = function () {
-            const user = getParameterByName('user');
-            const inventory = document.getElementById('inventory');
-
-            if (user === 'admin') {
-                inventory.classList.add('active');
-                document.getElementById('warehouse').style.display = 'block';
-                for (let i = 1; i <= 6; i++) {
-                    document.getElementById('store' + i).style.display = 'block';
-                }
-            } else if (user.startsWith('store')) {
-                inventory.classList.add('active');
-                document.getElementById('warehouse').style.display = 'none';
-                for (let j = 1; j <= 6; j++) {
-                    document.getElementById('store' + j).style.display = 'none';
-                }
-                document.getElementById('store' + user.slice(-1)).style.display = 'block';
-            } else {
-                window.location.href = 'inventario.html';
-            }
-
-            loadProducts();
+        locationSelect.onchange = function () {
+            updateBrands();
         };
 
+        productForm.onsubmit = function (event) {
+            event.preventDefault();
+
+            const location = locationSelect.value;
+            const brand = brandSelect.value;
+            const productName = document.getElementById('productName').value;
+            const productCapacity = document.getElementById('productCapacity').value;
+            const productRam = document.getElementById('productRam').value;
+            const productColor = document.getElementById('productColor').value;
+
+            if (!brands[location].includes(brand)) {
+                brands[location].push(brand);
+                updateInventory();
+            }
+
+            const container = document.getElementById(`${location}Brands`);
+            const brandColumn = Array.from(container.children).find(child => child.querySelector('h3').innerText === brand);
+            const itemList = brandColumn.querySelector('ul.item-list');
+
+            if (brandColumn) {
+                const newProduct = document.createElement('li');
+                newProduct.innerHTML =
+                    `<p><strong>${productName}</strong></p>
+            <p>Capacidad: ${productCapacity} GB</p>
+            <p>Memoria RAM: ${productRam} RAM</p>
+            <p>Color: ${productColor}</p>`;
+                itemList.appendChild(newProduct);
+            }
+
+            modal.style.display = 'none';
+            productForm.reset();
+
+            applyStyles();
+        };
+
+        updateInventory();
     </script>
+
 </body>
 </html>
