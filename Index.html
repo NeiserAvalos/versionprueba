@@ -7,7 +7,7 @@
     <title>Inicio de Sesión</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f0f0f0;
             display: flex;
             flex-direction: column;
@@ -20,45 +20,57 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+        
+        
+        h1, p {
+            color: #fff;
+            text-shadow: 3px 3px 9px rgba(0, 0, 0, 0.4);
+            margin-top: 0px;
+        }
 
-        h1,
-        p.intro-text {
-            color: white;
+        h2 {
+            margin-top: 23px;
+            margin-bottom: 10px;
+            color: #000000;
         }
 
         .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
         }
 
-        input[type="text"],
-        input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
+        input[type="text"], input[type="password"] {
+            width: calc(90% - 24px);
+            padding: 12px;
+            margin: 15px 0;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 16px;
         }
 
         input[type="submit"] {
-            background-color: #4CAF50;
+            font-family: 'Poppins', sans-serif;
+            background-color: #00b418;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            margin-top: 18px;
+            margin-bottom: 13px;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s;
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #000000;
         }
 
         .error-message {
@@ -72,13 +84,12 @@
             }
 
             .login-container {
-                padding: 15px;
+                padding: 20px;
                 width: 100%;
             }
 
-            input[type="text"],
-            input[type="password"] {
-                width: calc(100% - 16px);
+            input[type="text"], input[type="password"] {
+                width: calc(100% - 20px);
             }
 
             input[type="submit"] {
@@ -86,10 +97,12 @@
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Bienvenido</h1>
+    <h1>Bienvenido a ******</h1>
+        <p>Tu tienda de celulares de confianza</p>
     <div id="login" class="login-container">
         <h2>Iniciar Sesión</h2>
         <form id="loginForm" onsubmit="return validateForm()">
